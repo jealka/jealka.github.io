@@ -93,3 +93,36 @@ http://www.smol.thm/wp-admin/profile.php?cmd=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2
 ```
 
 ## Privilege Escalation
+As we saw earlier, we're the `www-data` user. We can see that there exist four other users on the system, `diego`, `gege`, `think` and `xavi`. Unfortunately, we can't access any of their home folders. At this point, one can facilitate the machine enumeration by using scripts such as [linPEAS](https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS) to find a possibility for privilege escalation. For this machine, no extensive enumeration is required because we can easily find an interesting backup file, `wp_backup.sql`, under `/opt`, obviously a backup of some or all of the Wordpress data. This could be very helpful, since it potentially contains password hashes and other useful information. To inspect the file's content, one can copy the backup file to the web root (`/var/www/wordpress`), to then just download it with the browser.
+
+In the file we can see the restoration routine for the user table. We find six password hashes, whereby one password hash probably correlates with the password for `wpuser` that we already know. We copy the hashes into a file, which can be processed by John for cracking.
+
+```
+admin:-REDACTED HASH-
+wpuser:-REDACTED HASH-
+think:-REDACTED HASH-
+gege:-REDACTED HASH-
+diego:-REDACTED HASH-
+xavi:-REDACTED HASH-
+```
+
+We can then try to crack the hashes with John with the following command, using `rockyou.txt` as wordlist.
+
+```
+john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+```
+
+After a while, we can see that John was able to crack two of the six passwords and we obtain passwords for `diego` and `gege`. The latter seems to have been changed in the past, since we can't use it to log into Wordpress or the local account. The credentials of `diego` on the other hand let's us login as him with `su diego`. In our new home folder, we find the `user.txt` flag.
+
+Since all the four users are part of the group `internal`, we can enumerate the other user's home folders. We can see that `think` has an `.ssh` folder which contains a private and readable SSH key. And in fact, this private key allows us to logon to the machine as `think` via SSH.
+
+At this point I actually loaded `linPEAS` onto the machine, since I got stuck. After extensive analysis and having eliminated a few false-positives (e.g. a 95% attack vector kernel exploit, which turned out to be not applyable) I redeemed the second hint of this room, indicating that `linPEAS` itself doesn't find the vulnerability, but indicates it, by prompting the user to check some things himself. After more search, I found that `linPEAS` can't use `su` to try logging in passwordless as another user, strongly suggesting to do it manually. It turns out that the user `think` can passwordless login as user `gege`. This step in the privilege escalation demonstrates, that solutions do not always need to be complex and that a penetration tester has to work thorough, even though some vectors appear to obvious and stupid to him.
+
+In the home directory of the user `gege`, we find (or already found) a compressed backup of the whole Wordpress web directory, at least this is what the file's name indicates. Prior, we didn't have read access to the file but are now able to unzip it. When doing so, we are prompted for a password. In fact, we aready found one of the user's old passwords. If we are lucky, the time of the backup's creation and the active use of the password collide. And so it does!
+
+Inspecting the content of the unzipped archive, we should immediately inspect the `wp-config.php` file, since the provided password may differ to the one we already found earlier. In this version of the file, it seems that the user `xavi` temporarily setup the DB access with his private credentials, giving us another password to try. As user `gege`, we can climb another rung by using `su xavi` and the newly found password.
+
+The last step is fairly obvious, since the user `xavi` is allowed to run every command with `sudo`, as `sudo -l` tells us. `sudo -s` quickly gives us a root shell and allows us to retrieve the `root.txt` flag.
+
+## Conclusion
+I hope you had as much fun as I had hacking this box and that this write-up could give you some insights. The box taught me to remain thorough in my approach, which is a valuable lesson. Thanks to [josemlwdf](https://tryhackme.com/r/p/josemlwdf) for creating this room.
