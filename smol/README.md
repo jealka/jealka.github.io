@@ -13,3 +13,5 @@ As the result shows us, two ports are open, offering the service SSH and a webpa
 ```
 
 When we try to visit the website, we get redirected to `www.smol.thm`, which is unknown to our domain server. Subsequently, we add the domain to our `/etc/hosts` file, allowing us to open the page.
+
+![Initial view of webpage](img/Smol-InitialWebpage.png)
