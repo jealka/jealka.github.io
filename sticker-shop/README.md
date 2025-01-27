@@ -40,7 +40,7 @@ Apart from two buttons and cat images, there is nothing to see.
 
 ![Feedback page of the hosted website](img/StickerShop-FeedbackPage.png)
 
-- If we try to access the flag under the known location (`http://sticker.thm:8080/flag.txt`), we receive the response code `401`, which tells us that we are not authorized to access the flag.
+- If we try to access the flag under the known location (`http://sticker.thm:8080/flag.txt`), we receive the response code `401`, which tells us that we are not authorized to access the page.
 
 ### Fuzzing
 Let's see if we can find more resources on the server with `gobuster`. Since no domain name for the website is known, we can only enumerate directories, not subdomains. Additionally, we will also look for files with the extensions `.txt`, `.py`, `.bak` and `.sql`, to find potential backups or source code.
