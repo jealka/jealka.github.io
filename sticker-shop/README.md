@@ -119,7 +119,7 @@ Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
 10.10.194.50 - - [27/Jan/2025 10:33:07] "GET /THM%7B-REDACTED_FLAG-%7D HTTP/1.1" 404 -
 ```
 
-Note that the string is URL encoded. We can decode it with hURL.
+Note that the string is URL encoded. We can decode it with hURL, which can be installed via `apt`.
 ```
 hURL -u "THM%7B-REDACTED_FLAG-%7D"
 Original    :: THM%7B-REDACTED_FLAG-%7D
@@ -127,4 +127,4 @@ URL DEcoded :: THM{-REDACTED_FLAG-}
 ```
 
 ## Conclusion
-I really enjoyed this CTF, since XSS attacks are quite rare on TryHackMe and similar platforms, probably due to the necessary user interaction which needs to be emulated. Thanks to TryHackMe user [toxicat0r](https://tryhackme.com/p/toxicat0r) for creating this room.
+I really enjoyed this CTF, since XSS attacks are quite rare on TryHackMe and similar platforms, probably due to the necessary user interaction that requires a form of emulation. Thanks to TryHackMe user [toxicat0r](https://tryhackme.com/p/toxicat0r) for creating this room.
