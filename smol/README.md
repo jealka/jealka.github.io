@@ -1,5 +1,5 @@
 # Write-up: **Smol**
-**Date:** 01/27/2025
+**Date:** 01/26/2025
 
 **User:** [JAKK](https://tryhackme.com/p/JAKK)
 
