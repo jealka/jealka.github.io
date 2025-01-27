@@ -87,7 +87,7 @@ Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
 10.10.194.50 - - [27/Jan/2025 10:23:56] code 404, message File not found
 10.10.194.50 - - [27/Jan/2025 10:23:56] "GET /http://127.0.0.1:8080/view_feedback HTTP/1.1" 404 -
 ```
-Trying to navigate to the newly found route, `/view_feedback`, doesn't give us more information about the site since authentication is required. But now we can try to elevate the XSS to reach our goal!
+Navigating to the newly found route, `/view_feedback`, won't give us more information about the site since authentication is required. But we can now try to elevate the XSS to reach our goal!
 
 Trying the easiest thing, we use the following feedback message to dump the session cookies of the staff. This only works if the creators of the website forgot to set the cookies as HttpOnly, allowing Javascript to access them.
 ```
