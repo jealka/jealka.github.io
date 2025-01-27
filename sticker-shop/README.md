@@ -55,8 +55,6 @@ In general, it's also worth checking if there are any hidden GET or POST paramet
 
 ```
 arjun -u http://sticker.thm:8080/submit_feedback -m POST
-```
-```
 [*] Scanning 0/1: http://sticker.thm:8080/submit_feedback
 [*] Probing the target for stability
 [*] Analysing HTTP response for anomalies
