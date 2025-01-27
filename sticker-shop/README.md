@@ -35,7 +35,7 @@ We see two open ports with the web service being offered on `8080`. Let's open t
 
 Apart from two buttons and cat images, there is nothing to see.
 
-- We're not able to inspect the `/static/` route or its subfolders, such as `/static/images/`, which contains the image files. The images are sequentially named, i.e. `cat_sticker_1.png`, `cat_sticker_2.png`, and the absence of `cat_sticker_3.png` likely tells us that there are no other images. Since the file format is PNG, no secret information could have been embedded via steganography.
+- We're not able to inspect the `/static/` route or its subfolders, such as `/static/images/`, which contains the image files. The images are sequentially named, i.e. `cat_sticker_1.png`, `cat_sticker_2.png`. The absence of `cat_sticker_3.png` likely tells us that there are no other images. Since the file format is PNG, no secret information could have been embedded via steganography.
 - Inspecting the buttons, we can see that *Home* leads us to `/`, i.e. the position we're currently at, while *Feedback* brings us to `/submit_feedback`. There we find an input form that allows us to submit feedback, which is sent to the same URI via POST.
 
 ![Feedback page of the hosted website](img/StickerShop-FeedbackPage.png)
