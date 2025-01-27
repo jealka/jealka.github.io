@@ -66,7 +66,7 @@ arjun -u http://sticker.thm:8080/submit_feedback -m POST
 Unfortunately, we can't find any hidden parameters.
 
 ## Tampering With the Input Form
-When we send feedback via the input form (on `/submit_feedback`) we're being told that the message will be evaluated shortly by the site's staff. It could be possible that the person doing this might use a web browser to access a restricted section of the website, in which case we can try to inject some Javascript code into the staff's rendered webpage by including code in our message. This of course only works if the submitted message isn't sanitized by the server and just handed down. To test this, we will start a simple webserver with Python and see if requests on it are being made.
+When we send feedback via the input form (on `/submit_feedback`) we're being told that the message will be evaluated shortly by the site's staff. It could be possible that the person doing this might use a web browser to access a restricted section of the site, in which case we can try to inject some Javascript code into the staff's rendered webpage by including code in the message. This of course only works if the submitted message isn't sanitized by the server. To test this, we will start a simple webserver with Python and see if requests on it are being made.
 
 We start the server with the following command.
 ```
