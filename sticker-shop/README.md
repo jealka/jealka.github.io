@@ -73,7 +73,7 @@ We start the server with the following command.
 python -m http.server 9000
 ```
 
-We then send the following message via the form. The code included in the `<script>` tags prompts an HTTP request to our local server performed by the staff. Depending on the fact if a request is made, we can determine if the XSS attack works.
+We then send the following message via the form. The code included in the `<script>` tags prompts an HTTP request to our local server which is performed by the staff's browser. Depending on the fact if a request is made, we can determine if the XSS attack works.
 ```
 <script>
 var req = new XMLHttpRequest();
