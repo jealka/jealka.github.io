@@ -99,7 +99,7 @@ req.send();
 ```
 Unfortunately, we reveive a request on `/`, meaning that the session cookies, if existent, can't be read by our injected code.
 
-But since the staff obviously can access the `/view_feedback` route, which requires authentication, he will likely be able to also access `/flag.txt`. We therefore extend our payload a little bit and let the staff's browser make a request for the flag and then send us its value.
+But since the staff obviously can access the `/view_feedback` route, which requires authentication, he is likely able to access `/flag.txt`. We therefore extend our payload and let the staff's browser make a request for the flag, whose value is then sent to us.
 
 ```
 <script>
