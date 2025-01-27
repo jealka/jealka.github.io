@@ -89,7 +89,7 @@ Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
 ```
 Navigating to the newly found route, `/view_feedback`, won't give us more information about the site since authentication is required. But we can now try to elevate the XSS to reach our goal!
 
-Trying the easiest thing, we use the following feedback message to dump the session cookies of the staff. This only works if the creators of the website forgot to set the cookies as HttpOnly, allowing Javascript to access them.
+Trying the easiest thing, we use the following message to dump the session cookies of the staff. This only works if the creators of the website forgot to set the cookies as HttpOnly, allowing Javascript to access them.
 ```
 <script>
 var req = new XMLHttpRequest();
