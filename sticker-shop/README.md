@@ -28,7 +28,7 @@ PORT     STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
-We see two open ports with the web service being offered on `8080`. Let's open the page in the browser.
+We see two open ports with the web service being offered on `8080`. Let's open the page with a web browser.
 
 ### Inspecting the Website
 ![Homepage of hosted website](img/StickerShop-InitialPage.png)
