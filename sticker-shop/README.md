@@ -120,8 +120,6 @@ Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
 Note that the string is URL encoded. We can decode it with hURL.
 ```
 hURL -u "THM%7B-REDACTED_FLAG-%7D"
-```
-```
 Original    :: THM%7B-REDACTED_FLAG-%7D
 URL DEcoded :: THM{-REDACTED_FLAG-}
 ```
