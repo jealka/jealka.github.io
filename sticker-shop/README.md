@@ -51,7 +51,7 @@ gobuster dir -u 'http://sticker.thm:8080/' -w '/usr/share/wordlists/dirbuster/di
 
 As a result, we only find the already known path `/flag.txt`.
 
-In general, it's also worth checking if there are any hidden GET or POST parameters being evaluated on the known routes, which can be done with [arjun](https://github.com/s0md3v/Arjun).
+In general, it's also worth checking if there are any hidden GET or POST parameters being evaluated on the known routes, which can be done via [arjun](https://github.com/s0md3v/Arjun).
 
 ```
 arjun -u http://sticker.thm:8080/submit_feedback -m POST
