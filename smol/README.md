@@ -1,4 +1,8 @@
 # Write-up: **Smol**
+**Date:** 01/27/2025
+
+**User:** [JAKK](https://tryhackme.com/p/JAKK)
+
 [Smol](https://tryhackme.com/r/room/smol) is a medium-ranked CTF box that introduces us to vulnerable Wordpress plugins, highlighting the need for webmasters to keep dependencies up-to-date and to consider source and reputation of external packages. The vulnerable webpage allows the execution of malicious code, which gives the opportunity to gain a foothold on the system. Ultimately, root access is obtained through a combination of misconfigurations and poorly managed passwords.
 
 ## Reconaissance
