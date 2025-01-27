@@ -31,7 +31,7 @@ Apart from two buttons and cat images, there is nothing to see.
 
 - We're not able to inspect the `/static/` route or its subfolders, such as `/static/images/`, which contains the image files. The images are sequentially named, i.e. `cat_sticker_1.png`, `cat_sticker_2.png`, and the absence of `cat_sticker_3.png` likely tells us that there are no other images. Since the file format is PNG, no secret information could have been embedded via steganography.
 - Inspecting the buttons, we can see that *Home* leads us to `/`, i.e. the position we're currently at, while *Feedback* brings us to `/submit_feedback`. There we find an input form that allows visitors to submit feedback, that is being sent to the URI via POST.
-
+![Feedback page of the hosted website](img/StickerShop-FeedbackPage.png)
 
 ```
 gobuster dir -u 'http://sticker.thm:8080/' -w '/usr/share/wordlists/dirb/common.txt'
