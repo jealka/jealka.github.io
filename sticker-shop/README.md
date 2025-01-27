@@ -1,4 +1,8 @@
 # Write-Up: The Sticker Shop
+**Date:** 01/27/2025
+
+**User:** [JAKK](https://tryhackme.com/p/JAKK)
+
 [The Sticker Shop](https://tryhackme.com/r/room/thestickershop) is an easy-ranked CTF box that challenges us to access a flag at a specified location of the web server. It introduces us to a common web vulnerability found in websites, seldom being showcased on TryHackMe.
 
 ## Reconaissance
