@@ -112,7 +112,7 @@ share_req.send();
 </script>
 ```
 
-It's important to reference the flag by its relative path, otherwise the payload will not work. This is probably due to CORS rules, preventing the access to the file from outside the domain. Finally, we retrieve the flag from the requested URI that we can inspect on our local server.
+It's important to reference the flag by its relative path, otherwise the payload will not work. This is probably due to CORS rules, preventing the access to the file from outside the domain. Finally, we retrieve the flag from the requested URI that we can inspect in the shell session where we launched the server.
 ```
 Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
 10.10.194.50 - - [27/Jan/2025 10:33:07] code 404, message File not found
