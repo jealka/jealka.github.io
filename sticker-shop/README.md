@@ -122,7 +122,7 @@ Note that the string is URL encoded. We can decode it with hURL.
 hURL -u "THM%7B-REDACTED_FLAG-%7D"
 ```
 ```
-Original    :: THM%7B-REDACTED_FLAG-%7D                                                                                                                                                                            
+Original    :: THM%7B-REDACTED_FLAG-%7D
 URL DEcoded :: THM{-REDACTED_FLAG-}
 ```
 
