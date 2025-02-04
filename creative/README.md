@@ -109,11 +109,11 @@ echo 'PHP is being executed!';
 ?>
 ```
 
-Unfortunately, the payload as it should be interpreted by the server is just reflected as text, even though being correct. Of course, the `<?php` sequence isn't contigous but separated by a comment, which could prevent the interpretation as PHP code. Another possible explanation is that the backend server isn't run with PHP but for example Python.
+Unfortunately, the payload, as it should be interpreted by the server, is just reflected as text. This may be due to the `<?php` sequence not being contigous but being separated by a comment, which could prevent the server-side interpretation as PHP code. Another possible explanation is that the backend server doesn't use PHP, but for example Python.
 
 ![Attempt of circumventing the code injection filters](img/Creative-Filter-Circumvent.png)
 
-As for now, let's try another approach than code injection.
+As for now, let's proceed and try another approach.
 
 ### Enumerate Local Ports
 After having tried to include local files in many different ways, but always encountering the *Dead* message, we could try to find locally available ports, that we previously didn't find with `nmap`. Since it is way to tedious to check all 65,536 ports by hand, we can write a custom but very simple Python script that automates this task.
