@@ -79,9 +79,10 @@ Great, we found another segment of the site under `beta.creative.thm`! Let's add
 As you can see, we found a web form allowing us to check if a given URL is online. Enumerating URIs on the newly found subdomain, with the prior `gobuster` commands, doesn't bring up any unknown resource.
 
 
+
 ## Exploiting the URL Tester
-### Checking RCE
-Let's start a local HTTP server, to inspect what exactly happens when the tester tool checks an URL's availability. This can be quickly done with Python's `SimpleHTTPServer` module, which serves files and directory listings from the path it is launched. For testing purposes, we create a file named `test` whose sole content is also just the text "test". We then prompt the tool to check our server's availability by submitting `http://{YOUR IP}:8000/test` in the text field and see the specified file being requested.
+### Checking for RCE
+Let's start a local HTTP server, st that we can inspect what exactly happens when the tester tool checks an URL's availability. This can be done quickly with Python's `SimpleHTTPServer` module, that serves files and directory listings from the path it is launched. For testing purposes, we also create a file named `test` whose sole content is the text "test". We then prompt the tool to check our server's availability by submitting `http://{YOUR IP}:8000/test` in the text field of the webpage.
 
 ```
 > python -m http.server 8000
