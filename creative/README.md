@@ -2,7 +2,7 @@
 **Date:** 02/04/2025 \
 **User:** [JAKK](https://tryhackme.com/p/JAKK)
 
-[Creative](https://tryhackme.com/r/room/creative) is an easy-ranked CTF box, challenging us to exploit a vulnerable web application, which opens us the possibility to compromise the web server and elevate our privileges with the aid of a dangerous misconfiguration.
+[Creative](https://tryhackme.com/r/room/creative) is an easy-ranked CTF box, challenging us to exploit a vulnerable web application, which opens the possibility to compromise the web server and elevate our privileges with the aid of a dangerous misconfiguration.
 
 
 ## Reconaissance
