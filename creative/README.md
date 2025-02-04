@@ -7,7 +7,7 @@
 
 ## Reconaissance
 ### Port Scan
-To gain a foothold on the victim's system, we first need to determine how we can interact with it, i.e. finding out about open ports and services being offered. We conduct a port scan with `nmap`, splitting port discovery and service identification in two. This gives us the advantage that we can check all 65,536 ports without conducting the costly service discovery (`-sV`) and default scripts scans (`-sC`) at the same time. The open ports found are then specifically scanned for services. Be aware that the flag `-T4` gives us an advantage in performance but makes the scan easily detectable for firewalls and other security measures.
+To gain a foothold on the victim's system, we first need to determine how we can interact with it, i.e. finding out about open ports and services being offered. We conduct a port scan with `nmap`, splitting port discovery and service identification in two. This gives us the advantage that we can check all 65,536 ports without conducting the costly service discovery (`-sV`) and default scripts scans (`-sC`) at the same time. The open ports can then specifically be scanned for services. Be aware that the flag `-T4` gives us an advantage in performance but makes the scan easily detectable for firewalls and other security measures.
 
 ```
 > nmap -T4 -p0-65535 creative.thm
