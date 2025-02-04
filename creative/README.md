@@ -22,7 +22,7 @@ PORT   STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 121.44 seconds
 ```
 
-We see that port `22` and `80` are open, presumely offering SSH and a web server respectively. To ensure this assumption, we conduct a service discovery and default script scan for those two ports, which confirms the hypothesis.
+We see that port `22` and `80` are open, presumably offering SSH and a web server respectively. To ensure this assumption, we conduct a service discovery and default script scan for those two ports, which confirms the hypothesis.
 
 ```
 > nmap -T4 -p22,80 -sV -sC creative.thm
