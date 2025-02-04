@@ -164,13 +164,13 @@ After having cracked the password (which is deliberately not shown here, but can
 
 
 ## Escalating Our Privileges
-Inspecting our user's home folder, we can see that the `.bash_history` file actually contains some information. Under it, we find the following bit.
+Inspecting besaid home folder, we see that the `.bash_history` file actually contains some information. Under it, we find the following bit.
 
 ```
 echo "saad:-REDACTED-" > creds.txt
 ```
 
-Apparently, we found ourselves a password for this user. Let's check its validity with `sudo -l`, which also gives us further information on potential extra rights our user has on this machine.
+Apparently, we found ourselves a password for this user. Let's check its validity with `sudo -l`, which further gives us important information on possiblities for privilege escalation.
 
 ```
 > sudo -l
@@ -183,7 +183,7 @@ User saad may run the following commands on m4lware:
     (root) /usr/bin/ping
 ```
 
-As [GTFOBins](https://gtfobins.github.io/) suggests, `ping` doesn't allow us to break out and maintain root rights. The `env_keep+=LD_PRELOAD` on the other hand seems problematic, since it means that the user can start the `ping` program while using custom shared libraries, which is normally used to replace standard OS functionality for specialized use cases. In our case this allows us to create our own litte shared library, that we will write in C. Note that the function `_init()` is invoked when the shared library is started. Since we start the whole process (i.e. `ping`) with `sudo`, we have the rights to set the user and group ID to 0, making us root in this context. We then launch a `sh` session, before the invoke of `ping` takes place.
+As [GTFOBins](https://gtfobins.github.io/) states, `ping` won't allow us to break out of a process and maintain its root rights. But the `env_keep+=LD_PRELOAD` part on the other hand seems interesting, since it indicates that our user can start the `ping` program in combination with custom runtime libraries, since the according environment variable is kept, a functionality normally used to replace standard OS routines which can be useful in special cases. In our case this allows to create our own litte runtime library, that we will write in C. Note that the function `_init()` is invoked when the library is loaded. Since we start the whole process (i.e. `ping`) with `sudo`, in the load phase of the library we have the rights to set the user and group ID to 0, making us root in this context. We can then launch a `sh` session and escape before the invoke of `ping` even takes place.
 
 ```C
 #include <stdio.h>
@@ -197,7 +197,7 @@ void _init() {
 }
 ```
 
-We compile the code, that we wrote in `exploit.c` on the victim's machine, with the following command.
+We compile the code, that is in `exploit.c` on the victim's machine, with the following command.
 
 ```
 gcc -fPIC -shared -o exploit.so exploit.c -nostartfiles
@@ -209,4 +209,8 @@ We can then start our root shell by invoking `ping` with `sudo` while accordingl
 sudo LD_PRELOAD=./exploit.so ping
 ```
 
-We then find the `root.txt` flag under `/root`, finalizing our task of breaching the web server.
+In turn the `sh` session with root rights starts and we can find and print the `root.txt` flag under `/root`, finalizing our task of breaching the web server.
+
+
+## Miscellaneous
+Thanks to user [ssaadakhtarr](https://tryhackme.com/p/ssaadakhtarr) for creating this room.
