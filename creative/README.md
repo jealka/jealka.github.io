@@ -213,4 +213,4 @@ In turn the `sh` session with root rights starts and we can find and print the `
 
 
 ## Miscellaneous
-Thanks to user [ssaadakhtarr](https://tryhackme.com/p/ssaadakhtarr) for creating this room.
+Thanks to TryHackMe user [ssaadakhtarr](https://tryhackme.com/p/ssaadakhtarr) for creating this room.
