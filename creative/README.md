@@ -89,7 +89,7 @@ Let's start a local HTTP server, st that we can inspect what exactly happens whe
 10.10.109.142 - - [04/Feb/2025 06:56:30] "GET /test HTTP/1.1" 200 -
 ```
 
-Furthermore, we see that the file's content is being reflected on the response to our POST submit. If we are lucky, this could potentially imply that arbitrary code can be injected, especially if behind the WSGI service `nginx` on port `80` is some form of PHP driven entity. Let's change the content of our test file and see what happens, if the following simple PHP code is processed by the URL tester tool.
+In the browser we can see that the file's content is being reflected in the response to our POST submit. If we are lucky, we could use this to inject arbitrary code, especially if the entity behind the WSGI service `nginx` on port `80` is in any form PHP driven. Let's change the content of our file and see what happens, if the following simple PHP code is processed by the URL tester tool.
 
 ```php
 <?php
@@ -97,7 +97,7 @@ echo 'PHP is being executed!';
 ?>
 ```
 
-Unfortunately, we now receive an empty response when prompting the URL. When inspecting the site's source code, we can see why. The tool filtered the file's content and replaced the opening and ending brackets with comment sequences.
+Unfortunately, we receive a visibly empty response when prompting the URL. When inspecting the site's source code, we can see, that the tool filtered our file's content and replaced the opening and ending brackets of the PHP code with comment sequences.
 
 ![Effect of filters preventing the injection of PHP code](img/Creative-Filter.png)
 
