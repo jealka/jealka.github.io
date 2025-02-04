@@ -72,11 +72,11 @@ At this point, we should check if subdomains exist. To do this, we need to know 
 Found: beta.creative.thm Status: 200 [Size: 591]
 ```
 
-Great, we found another segment of the website under `beta.creative.thm`! Let's add this hostname to our `/etc/hosts` file and inspect the site we just found.
+Great, we found another segment of the site under `beta.creative.thm`! Let's add the hostname to our `/etc/hosts` file and inspect the site.
 
 ![Webpage of subdomain](img/Creative-BetaSubdomain.png)
 
-As we can see, we find a web form that allows us to check if a given URL is online. Trying to enumerate URIs on the newly found subdomain with the prior `gobuster` commands doesn't bring up any new resource.
+As you can see, we found a web form allowing us to check if a given URL is online. Enumerating URIs on the newly found subdomain, with the prior `gobuster` commands, doesn't bring up any unknown resource.
 
 
 ## Exploiting the URL Tester
