@@ -118,7 +118,7 @@ As for now, let's proceed and try another approach.
 ### Enumerate Local Ports
 After having tried to include local files via the URL tester, e.g. by path traversal, but always encountering the *Dead* message, I proceeded with trying to find local ports, that could have not been found by `nmap`. Since it is too tedious to check all 65,536 ports by hand, we can write a custom but very simple Python script that automates this task.
 
-The script iterates through all possible port numbers and makes a request with `curl` to URL tester tool while using the localhost address `0.0.0.0`, so that the server scans itself, at least for other web services.
+The script iterates through all possible port numbers and makes a request via `curl`, to the URL tester tool, requesting a resource from the localhost address `0.0.0.0`. If the result deviates from the expected message, the script assumes to have found an open port.
 
 ```python
 import subprocess, sys
@@ -134,7 +134,7 @@ for i in range(65536):
 print('Finished enumeration.')
 ```
 
-We can then invoke our custom script in the following fashion.
+The script can be invoked in the following fashion.
 
 ```
 > python enumerate-internal-ports.py beta.creative.thm
@@ -144,11 +144,11 @@ Start enumerating internal ports...
 [+] Port 1337 can be reached
 ```
 
-Okay, port `1337` is new (actually `0` is new too, but references the service on port `80`). Let's go back to the webpage and request the tool to check `http://0.0.0.0:1337`.
+Okay, port `1337` being open is news (actually port `0` is news too, but just references the service on port `80`). Let's go back to the webpage and request the tool to check the availability of `http://0.0.0.0:1337`.
 
 ![Directory listing accessed via the internal port](img/Creative-WebDirectoryListing.png)
 
-Wow, I didn't expect the whole directory listing from the server. Specifying URIs (such as `http://0.0.0.0:1337/home`) shows us that we can basically include every directory listing and file content, at least if we have the necessary permissions.
+Woah, I didn't expect a whole directory listing from the server. It seems like a server, similar to Python's SimpleHTTPServer module, is run from the root of the system. Prompting other URIs (such as `http://0.0.0.0:1337/home`) shows that we can basically include every directory listing and also file content, given that the web user has the necessary permissions.
 
 
 ## Gaining a Foothold
