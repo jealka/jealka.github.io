@@ -101,7 +101,7 @@ Unfortunately, we receive a visibly empty response when prompting the URL. When 
 
 ![Effect of filters preventing the injection of PHP code](img/Creative-Filter.png)
 
-Playing around with different payloads, one can quickly see that the sequence `<?` triggers the replacement, where as the comment sequence ends with the first occurence of `>`. Knowing this, we can elevate our payload to the following. This should actually trick the replacement filter and only comment out the inner `<?php>` sequence.
+Playing around with different payloads, one can quickly see that the sequence `<?` triggers the replacement, with the comment sequence ending at the first occurence of `>`. Knowing this, we can try to elevate our payload to the following. This should actually trick the replacement filter and only comment out the inner `<?php>` sequence, leaving us with exactly the right text.
 
 ```php
 <<?php>?php
