@@ -46,7 +46,7 @@ Nmap done: 1 IP address (1 host up) scanned in 11.91 seconds
 ```
 
 ### Discovering the Web Service
-The website served via port `80` is an almost unaltered web template, just referencing a few images and the `/components.html` resource. All in all, neither homepage nor `/components.html` contain any relevant parts that could help us compromising the web server. But maybe there are other hidden resources, which we will try to enumerate with `gobuster`.
+The website served via port `80` is an almost unaltered web template, just referencing a few images and the `/components.html` resource. All in all, neither homepage nor `/components.html` contain any relevant parts that could help us compromising the web server. Maybe there are hidden resources? We will try to enumerate those with `gobuster`.
 
 ```
 > gobuster dir -u http://creative.thm -w /usr/share/wordlists/dirb/common.txt
