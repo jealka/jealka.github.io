@@ -116,7 +116,7 @@ Unfortunately, the payload, as it should be interpreted by the server, is just r
 As for now, let's proceed and try another approach.
 
 ### Enumerate Local Ports
-After having tried to include local files in many different ways, but always encountering the *Dead* message, we could try to find locally available ports, that we previously didn't find with `nmap`. Since it is way to tedious to check all 65,536 ports by hand, we can write a custom but very simple Python script that automates this task.
+After having tried to include local files via the URL tester, e.g. by path traversal, but always encountering the *Dead* message, I proceeded with trying to find local ports, that could have not been found by `nmap`. Since it is too tedious to check all 65,536 ports by hand, we can write a custom but very simple Python script that automates this task.
 
 The script iterates through all possible port numbers and makes a request with `curl` to URL tester tool while using the localhost address `0.0.0.0`, so that the server scans itself, at least for other web services.
 
