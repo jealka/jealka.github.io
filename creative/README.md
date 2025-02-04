@@ -2,11 +2,12 @@
 **Date:** 02/04/2025 \
 **User:** [JAKK](https://tryhackme.com/p/JAKK)
 
-[Creative](https://tryhackme.com/r/room/creative) is an easy-ranked CTF box, testing us on exploiting a vulnerable web application, gaining an initial foothold on the webserver and elevate our privileges to root by exploiting a dangerous misconfiguration.
+[Creative](https://tryhackme.com/r/room/creative) is an easy-ranked CTF box, challenging us to exploit a vulnerable web application, which opens us the possibility to compromise the web server and elevate our privileges with the aid of a dangerous misconfiguration.
+
 
 ## Reconaissance
 ### Port Scan
-To gain a foothold on the victim's system, we need to determine how we can interact with it, i.e. finding out about open ports and services being offered. We can conduct the port scan with `nmap`, splitting the port discovery and service identification in two. This gives us the advantage that we can check all 65,536 ports without having to conduct the costly service discovery (`-sV`) and default scripts scans (`-sC`) on all of these. Be aware that the flag `-T4` gives us an advantage in performance but makes us detectable for firewalls and other security tools.
+To gain a foothold on the victim's system, we first need to determine how we can interact with it, i.e. finding out about open ports and services being offered. We conduct a port scan with `nmap`, splitting port discovery and service identification in two. This gives us the advantage that we can check all 65,536 ports being open without conducting the costly service discovery (`-sV`) and default scripts scans (`-sC`) at the same time. The open ports found are then specifically scanned for services. Be aware that the flag `-T4` gives us an advantage in performance but makes the scan easily detectable for firewalls and other security measures.
 
 ```
 > nmap -T4 -p0-65535 creative.thm
@@ -21,7 +22,7 @@ PORT   STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 121.44 seconds
 ```
 
-We can see that port `22` and `80` are open, probably offering SSH and a webserver respectively. To ensure this assumption, we conduct a service discovery and default script scans on those two ports.
+We see that port `22` and `80` are open, presumely offering SSH and a web server respectively. To ensure this assumption, we conduct a service discovery and default script scan for those two ports, which confirms the hypothesis.
 
 ```
 > nmap -T4 -p22,80 -sV -sC creative.thm
@@ -43,3 +44,6 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 11.91 seconds
 ```
+
+### Discovering the Web Service
+Visiting the page 
