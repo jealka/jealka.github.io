@@ -152,14 +152,15 @@ Woah, I didn't expect a whole directory listing from the server. It seems like a
 
 
 ## Gaining a Foothold
-Now that we found a LFI via an internal port, we should check if we can access any sensible information such as history files, logs and cryptographic keys. In fact, we find an `.ssh` folder with a private key in the home folder of the user `saad`. If we want to use it to connect to the victim's machine via SSH, we are prompted for a password, meaning that the SSH key is password encrypted. Let us transform the key to a format that can in turn be processed by `john` to crack the password.
+Now that we found the LFI via the internal port, we should check if we can access any sensible information, such as history files, logs and cryptographic keys. In fact, we can find an `.ssh` folder containing a private SSH key (in the home folder of user `saad`). If we try to use it to log on with SSH, we are prompted for a password, meaning that the SSH key is password encrypted. Let's transform the key to a format that can be processed by `john` to crack the password.
 
 ```
 > ssh2john id_rsa > hash
 > john --wordlist=/usr/share/wordlists/rockyou.txt hash
 ```
 
-After having cracked the password (which is deliberately not shown here, but found in `rockyou.txt`), we can actually log onto the machine as `saad`. In the user's home folder, we actually find the `user.txt` flag, which we could already have included via the LFI vulnerability.
+After having cracked the password (which is deliberately not shown here, but can be found in `rockyou.txt`), we can log onto the machine as `saad`. In the user's home folder, we find the `user.txt` flag, which could already have been obtained through the LFI vulnerability.
+
 
 
 ## Escalating Our Privileges
