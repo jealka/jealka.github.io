@@ -65,7 +65,7 @@ Unfortunately, the enumeration of URIs doesn't bring us anywhere.
 
 ---
 
-At this point, we could check if there are any subdomains that exist. To do this, we need to know the domain name of the web server, which is not indicated anywhere on the pages we have seen. But maybe we'll be lucky if we use the name of the room, i.e. `creative.thm`. To enumerate subdomains, we use the `vhost` option of `gobuster` and a wordlist of popular subdomain names that [can be found on Github](https://github.com/rbsec/dnscan/blob/master/subdomains-10000.txt).
+At this point, we should check if subdomains exist. To do this, we need to know the website's domain name, which is not indicated anywhere on the pages we have seen. But maybe we'll be lucky if we use the name of the room, i.e. `creative.thm`. To enumerate subdomains, we use the `vhost` option of `gobuster` and a wordlist of popular subdomain names that [can be found on Github](https://github.com/rbsec/dnscan/blob/master/subdomains-10000.txt).
 
 ```
 > gobuster vhost --append-domain --domain creative.thm --url http://10.10.109.142 --wordlist ~/Downloads/subdomains-10000.txt
