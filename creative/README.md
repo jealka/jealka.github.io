@@ -46,4 +46,28 @@ Nmap done: 1 IP address (1 host up) scanned in 11.91 seconds
 ```
 
 ### Discovering the Web Service
-Visiting the page 
+The website offered on port `80` is an almost unaltered web template, only referencing a few images and the `/components.html` resource. All in all, neither homepage nor `/components.html` contain any relevant parts that could help us in compromising the machine. But maybe there are other hidden resources, which we will try to enumerate with `gobuster`.
+
+```
+> gobuster dir -u http://creative.thm -w /usr/share/wordlists/dirb/common.txt
+/assets               (Status: 301) [Size: 178] [--> http://creative.thm/assets/]
+/index.html           (Status: 200) [Size: 37589]
+```
+
+```
+> gobuster dir -u http://creative.thm -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x html,php,txt,bak,sql,db,bac
+/index.html           (Status: 200) [Size: 37589]
+/assets               (Status: 301) [Size: 178] [--> http://creative.thm/assets/]
+/components.html      (Status: 200) [Size: 41148]
+```
+
+Unfortunately, the enumeration of URIs doesn't bring us anywhere.
+
+We could check if there are any subdomains that exist. To do this, we need to know the domain name of the web server, which is not indicated anywhere on the pages we have seen. But maybe we'll be lucky if we use the name of the room, i.e. `creative.thm`. To enumerate subdomains, we use the `vhost` option of `gobuster` and a wordlist of popular subdomain names that [can be found on Github](https://github.com/rbsec/dnscan/blob/master/subdomains-10000.txt).
+
+```
+> gobuster vhost --append-domain --domain creative.thm --url http://10.10.109.142 --wordlist ~/Downloads/subdomains-10000.txt
+Found: beta.creative.thm Status: 200 [Size: 591]
+```
+
+Great, we found another segment of the website under the subdomain `beta`! Let's add `beta.creative.thm` to our `/etc/hosts` file and inspect the site we just found.
